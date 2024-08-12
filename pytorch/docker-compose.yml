@@ -1,20 +1,21 @@
 version: "3"
 services:
-  sd-webui:
+  pytorch-for-gfx803-dev:
     image: woodrex/pytorch-for-gfx803-dev:latest
-    container_name: pytorch-for-gfx803-dev:latest
+    container_name: pytorch-for-gfx803-dev
     network_mode: host
+    user: root
     devices:
       - /dev/kfd:/dev/kfd
       - /dev/dri:/dev/dri
-    ipc: host
-    user: root
     group_add:
       - video
     cap_add:
       - SYS_PTRACE
     security_opt:
       - seccomp=unconfined
-    volumes:
-      - ./data:/stable-diffusion-webui/data
-      - ./outputs:/stable-diffusion-webui/outputs
+    environment:
+      - args="--use-pytorch-cross-attention"
+    # keep container open
+    command: ["tail", "-f", "/dev/null"]
+

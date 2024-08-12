@@ -1,4 +1,4 @@
-FROM woodrex/pytorch-for-gfx803-dev:1.0.0
+FROM woodrex/pytorch-for-gfx803-dev:latest
 
 WORKDIR /git
 RUN git clone https://github.com/woodrex83/stable-diffusion-webui-rx580.git
